@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HELLO IT IS WORK</h1>
+    <p id="output"></p>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script>
+        async function main(){
+            let pyodide = await loadPyodide();
+            let result = pyodide.runPython("1 + 3");
+            document.getElementById("output").innerText = result;
+        }
+        main();
+    </script>
+</body>
+</html>
