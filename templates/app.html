@@ -34,7 +34,7 @@ def {{ challenge.function_name }}({% for arg in challenge.arguments %}{{arg}}{% 
 
         require(['vs/editor/editor.main'], function () {
             window.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
-                value: "def foo():\n    return 1",
+                value: "def {{ challenge.function_name }}({% for arg in challenge.arguments %}{{arg}}{% if not loop.last%}, {% endif %}{% endfor %}):\n    return 1",
                 language: 'python'
             });
         });
