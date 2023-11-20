@@ -9,14 +9,7 @@ async function initializePyodide() {
 let pyodideReadyPromise = initializePyodide();
 
 async function main(){
-    let code = document.getElementById("code").textContent;
-    let functionName = "add_numbers";
-    let cases = [
-        [[2, 3], 5], 
-        [[5, 5], 10], 
-        [[0, 0], 0], 
-        [[1, 3], 4],
-    ]
+    let code = document.getElementById("code").value;
     let results = await testCode(code, functionName, cases);
 
     let table = buildTable(cases, results);
@@ -31,8 +24,17 @@ async function testCode(code, functionName, cases) {
     let pyodide = await pyodideReadyPromise;
 
     // Loads the python code, defining the function that we want to test
-    pyodide.runPython(code);
+    try {
+        pyodide.runPython(code);
+    } catch (error) {
+        alert(error);
+        return
+    }
     let pythonFunction = pyodide.globals.get(functionName);
+    if (pythonFunction == null) {
+        // todo
+        alert("Could not find function in code. Should be named", functionName);
+    }
 
     // Results of each case
     return cases.map(element => {
@@ -53,8 +55,8 @@ function buildTable(cases, results) {
     const headerRow = ["Arguments", "Solution", "Result", "Correct"];
     table.appendChild( buildRow(headerRow) );
 
-    results.forEach((result, i) => {
-        cases[i].push(...result);
+    cases = results.map((result, i) => {
+        return [...cases[i], ...result];
     });
     
     console.log(cases)
