@@ -8,7 +8,7 @@ This is a website aimed at teaching code through short examples. However, `quip`
 
 should? work
 
-Go to /static and use npm to install `pyodide` and `monaco-editor`. 
+Go to /static and use npm to install `bootstrap` and `monaco-editor`. 
 Use pip to install `flask`.
 Run `app.py`.
 
