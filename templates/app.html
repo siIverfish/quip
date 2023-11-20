@@ -11,8 +11,8 @@
         <div class="col border border-dark rounded m-3 p-4 bg-light">
             <h1>QUIP -- inital demo</h1>
             <textarea id="code" rows="10" cols="40">
-def {{ function_name }}(a, b):
-    return a + b
+def {{ challenge.function_name }}({% for arg in challenge.arguments %}{{arg}}{% if not loop.last%}, {% endif %}{% endfor %}):
+    return 1
             </textarea>
             <p id="output"></p>
             <button onclick="main()">Run Python Code</button>
@@ -25,8 +25,9 @@ def {{ function_name }}(a, b):
 
     <script>
         // this is correct after jinja2 templating -- ignore squigglies
-        var functionName = {{ function_name | tojson }};
-        var cases = {{ cases | tojson }};
+        // eslint-disable-next-line
+        var functionName = {{ challenge.function_name | tojson }};
+        var cases = {{ challenge.cases | tojson }};
     </script>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
     <script src="{{ url_for('static', filename='index.js')}}" charset="utf-8"></script>
