@@ -8,8 +8,12 @@ async function initializePyodide() {
 }
 let pyodideReadyPromise = initializePyodide();
 
+function getCode(){
+    return window.editor.getValue();
+}
+
 async function main(){
-    let code = document.getElementById("code").value;
+    let code = getCode();
     let results = await testCode(code, functionName, cases);
 
     let table = buildTable(cases, results);
@@ -17,7 +21,7 @@ async function main(){
     tableContainer.innerHTML = "";
     tableContainer.appendChild(table);
 
-    console.log(results)
+    console.log(results);
 }
 
 async function testCode(code, functionName, cases) {

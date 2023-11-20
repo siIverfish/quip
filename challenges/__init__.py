@@ -11,7 +11,8 @@ for file_name in os.listdir(os.path.dirname(__file__)):
     if file_name in IGNORED_FILES:
         continue
     else:
-        importlib.import_module(
-            "." + file_name.removesuffix(".py"),
-            "challenges"
-        )
+        importlib.import_module("." + file_name.removesuffix(".py"), "challenges")
+
+__all__ = [
+    "Challenge",
+]

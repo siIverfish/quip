@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quip demo</title>    
+    <title>quip demo</title>
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
     <div class="row p-3">
         <div class="col border border-dark rounded m-3 p-4 bg-light">
             <h1>QUIP -- inital demo</h1>
-            <textarea id="code" rows="10" cols="40">
+            <!-- <textarea id="code" rows="10" cols="40">
 def {{ challenge.function_name }}({% for arg in challenge.arguments %}{{arg}}{% if not loop.last%}, {% endif %}{% endfor %}):
     return 1
-            </textarea>
+            </textarea> -->
+		    <div id="monaco-editor" style="width: 300px; height: 300px; border: 1px solid grey"></div>
             <p id="output"></p>
             <button onclick="main()">Run Python Code</button>
         </div>
@@ -22,14 +24,28 @@ def {{ challenge.function_name }}({% for arg in challenge.arguments %}{{arg}}{% 
         </div>
     </div>
 
+    
+    <script src="{{ url_for('static', filename='node_modules/pyodide/pyodide.js') }}"></script>
+
+    <!-- Monaco -->
+    <script src="{{ url_for('static', filename='node_modules/monaco-editor/dev/vs/loader.js') }}"></script>
+    <script>
+        require.config({ paths: { vs: '/static/node_modules/monaco-editor/dev/vs' } });
+
+        require(['vs/editor/editor.main'], function () {
+            window.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+                value: "def foo():\n    return 1",
+                language: 'python'
+            });
+        });
+    </script>
 
     <script>
         // this is correct after jinja2 templating -- ignore squigglies
-        // eslint-disable-next-line
+        // todo: disable awful red marks
         var functionName = {{ challenge.function_name | tojson }};
         var cases = {{ challenge.cases | tojson }};
     </script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
     <script src="{{ url_for('static', filename='index.js')}}" charset="utf-8"></script>
 </body>
 </html>
