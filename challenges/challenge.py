@@ -5,6 +5,7 @@ class Challenge(type):
         assert cls.function_name
         assert cls.arguments
         assert cls.cases
+        assert cls.description
 
         Challenge.all_challenges[cls.function_name] = cls
 
