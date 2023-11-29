@@ -14,8 +14,9 @@ Run `app.py`.
 
 ```
 cd ./static
-npm install pyodide monaco-editor
+npm install
 cd ..
 pip install flask
+
 python app.py
 ```

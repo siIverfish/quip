@@ -16,11 +16,21 @@ function setCode(value){
     return window.editor.setValue(value);
 }
 
+function setError(value){
+    const tableContainer = document.getElementById("table-container")
+
+    const p = document.createElement("p");
+    p.className = "text-danger";
+    p.innerText = value;
+    
+    tableContainer.innerHTML = "";
+    tableContainer.appendChild(p);
+}
+
 function resetCode(){
     setCode("def " + challengeData.function_name + "(" + challengeData.arguments.join(", ") + "):" + "\n" + "\treturn 1");
     document.getElementById("description"    ).innerHTML = challengeData.description;
     document.getElementById("table-container").innerHTML = "Run code to see output";
-
 }
 
 function setPathWithoutReload(newPath){
@@ -65,7 +75,7 @@ async function testCode(code, functionName, cases) {
     try {
         pyodide.runPython(code);
     } catch (error) {
-        alert(error);
+        setError(error);
         return
     }
     let pythonFunction = pyodide.globals.get(functionName);
@@ -79,7 +89,14 @@ async function testCode(code, functionName, cases) {
         let args = element[0];
         let intendedResult = element[1];
         
-        let actualResult = pythonFunction.apply(null, args);
+        
+        let actualResult;
+        try {
+            actualResult = pythonFunction.apply(null, args);
+        } catch (error) {
+            setError(error);
+            return
+        }
 
         // e.g. [4, true]
         return [actualResult, actualResult == intendedResult];
