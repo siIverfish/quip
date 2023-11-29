@@ -1,10 +1,8 @@
 
 import json
-import random
 
 from flask import Flask, render_template, send_from_directory, abort
 from challenges import Challenge
-
 
 app = Flask("app")
 
@@ -31,6 +29,14 @@ def challenges_json_route(name):
         abort(404)
     return json.dumps(challenge.to_dict())
 
+@app.route("/prob/<identifier>")
+def codingbat_problem(identifier):
+    from codingbat import gen_challenge
+    return render_template(
+        "app.html", 
+        challenge=gen_challenge(identifier), 
+        all_challenges=list(Challenge.all_challenges.keys()),
+    )
 # this is a workaround until i figure out why monaco is
 # shooting out web requests to nonexistent scripts at root.
 # i think the app works fine without this, but shows errors in the js console.

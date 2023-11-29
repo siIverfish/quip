@@ -16,7 +16,7 @@ Run `app.py`.
 cd ./static
 npm install
 cd ..
-pip install flask
+pip install -r requirements.txt
 
 python app.py
 ```
