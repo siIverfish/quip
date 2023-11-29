@@ -12,3 +12,13 @@ class Challenge(type):
     @classmethod
     def get(cls, name):
         return cls.all_challenges.get(name)
+    
+    @classmethod
+    def to_dict(cls):
+        attributes = [
+            "function_name",
+            "arguments",
+            "cases",
+            "description"
+        ]
+        return {k:getattr(cls, k) for k in attributes}

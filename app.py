@@ -1,4 +1,7 @@
 
+import json
+import random
+
 from flask import Flask, render_template, send_from_directory, abort
 from challenges import Challenge
 
@@ -15,7 +18,18 @@ def challenges_route(name):
     challenge = Challenge.get(name)
     if not challenge:
         abort(404)
-    return render_template("app.html", challenge=challenge)
+    return render_template(
+        "app.html", 
+        challenge=challenge, 
+        all_challenges=list(Challenge.all_challenges.keys()),
+    )
+
+@app.route("/challenges/<name>/json")
+def challenges_json_route(name):
+    challenge = Challenge.get(name)
+    if not challenge:
+        abort(404)
+    return json.dumps(challenge.to_dict())
 
 # this is a workaround until i figure out why monaco is
 # shooting out web requests to nonexistent scripts at root.

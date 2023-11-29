@@ -8,13 +8,15 @@
 {% endblock links %}
 
 {% block content %}
+    <a href="/" class="position-absolute top-0 end-0">back</a>
     <div class="row p-3">
         <div class="col border border-dark rounded m-3 p-4 bg-light">
             <h1>QUIP -- initial demo</h1>
-            <p>{{ challenge.description }}</p>
+            <p id="description">{{ challenge.description }}</p>
 		    <div id="monaco-editor" style="width: 460px; height: 400px; border: 1px solid grey"></div>
             <p id="output"></p>
             <button onclick="main()">Run Python Code</button>
+            <button onclick="loadRandomChallenge()">Random Challenge</button>
         </div>
         <div class="col border border-dark rounded m-3 p-4 bg-light" id="table-container">
             Run code to see output
@@ -42,8 +44,8 @@
     <script>
         // this is correct after jinja2 templating -- ignore squigglies
         // todo: disable awful red marks
-        var functionName = {{ challenge.function_name | tojson }};
-        var cases = {{ challenge.cases | tojson }};
+        var challengeData = {{ challenge.to_dict() | tojson }}
+        var allChallenges = {{ all_challenges | tojson }}
     </script>
     <script src="{{ url_for('static', filename='index.js')}}" charset="utf-8"></script>
 {% endblock scripts %}
