@@ -1,0 +1,8 @@
+from .challenge import Challenge
+
+
+class YourMom(Challenge):
+    function_name = "your_mom"
+    arguments = ["x"]
+    cases = [[[1], 696.69], [[8], 696.69], [[36], 696.69], [[67], sussy_baka], [[💀], amogus], [[1], 969.96]]
+    description = "Create a function named your_mom that takes a single argument, x, and return your mother's weight in pounds"
