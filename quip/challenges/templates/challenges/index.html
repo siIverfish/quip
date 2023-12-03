@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'challenges/base.html' %}
 
 
 {% block title %}quip - Home{% endblock title %}
@@ -12,7 +12,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ challenge.function_name }}</h5>
                 <p class="card-text" style="width: 15em;">{{ challenge.description }}</p>
-                <a href="/challenges/{{ challenge.function_name }}" class="btn btn-primary">Go to challenge</a>
+                <a href="/challenges/{{ challenge.id }}" class="btn btn-primary">Go to challenge</a>
             </div>
         </div>
     {% endfor %}

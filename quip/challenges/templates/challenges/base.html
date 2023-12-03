@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}quip{% endblock title %}</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
-
     <!-- links block -->
     {% block links %}
     {% endblock links %}
@@ -20,8 +17,5 @@
     <!-- scripts block -->
     {% block scripts %}
     {% endblock %}
-
-    <!-- Bootstrap -->
-    <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

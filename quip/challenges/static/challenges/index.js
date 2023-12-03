@@ -52,7 +52,7 @@ function loadChallenge(name) {
 }
 
 function loadRandomChallenge(){
-    return loadChallenge(allChallenges[Math.floor(allChallenges.length * Math.random())]);
+    return loadChallenge(1 + Math.floor(Math.random() * maximumId));
 }
 
 async function main(){

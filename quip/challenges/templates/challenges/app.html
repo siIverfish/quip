@@ -1,10 +1,11 @@
-{% extends "base.html" %}
+{% extends "challenges/base.html" %}
+{% load static %}
 
 {% block title %}{{ challenge.function_name }} - quip Challenge{% endblock title %}
 
 {% block links %}
     <!-- Monaco -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/monaco-editor/dev/vs/editor/editor.main.css') }}">
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
 {% endblock links %}
 
 {% block content %}
@@ -29,13 +30,13 @@
     <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 
     <!-- Monaco -->
-    <script src="{{ url_for('static', filename='node_modules/monaco-editor/dev/vs/loader.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
     <script>
         require.config({ paths: { vs: '/static/node_modules/monaco-editor/dev/vs' } });
 
         require(['vs/editor/editor.main'], function () {
             window.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
-                value: "def {{ challenge.function_name }}({% for arg in challenge.arguments %}{{arg}}{% if not loop.last%}, {% endif %}{% endfor %}):\n    return 1",
+                value: "def {{ challenge.function_name }}({% for arg in challenge.function_args %}{{arg}}{% if not forloop.last%}, {% endif %}{% endfor %}):\n    return 1",
                 language: 'python'
             });
         });
@@ -44,8 +45,8 @@
     <script>
         // this is correct after jinja2 templating -- ignore squigglies
         // todo: disable awful red marks
-        var challengeData = {{ challenge.to_dict() | tojson }}
-        var allChallenges = {{ all_challenges | tojson }}
+        var challengeData = {{ challenge_data | safe }}
+        var maximumId = {{ max_id }}
     </script>
-    <script src="{{ url_for('static', filename='index.js')}}" charset="utf-8"></script>
+    <script src="{% static 'challenges/index.js' %}" charset="utf-8"></script>
 {% endblock scripts %}
