@@ -16,15 +16,13 @@ windows: `.\env\Scripts\activate`?
 3. Install packages
 `pip install django psycopg2 python-dotenv`
 
-4. (hard part) Get a postgres server running @ localhost with data specified in quip/quip/settings.py@DATABASES
-I recommend [this digitalocean article](https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-20-04)
-Copy database user password in a .env file at root of repository with PG_PASSWORD key set correctly
+4. (hard part) Get a postgres server running @ localhost with data specified in `quip/quip/settings.py@DATABASES`.
+I recommend [this digitalocean article](https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-20-04).
+Copy database user password in a .env file at root of repository with PG_PASSWORD key set correctly.
 
-5. Migrate
-go to /quip
-run `python manage.py makemigrations` & `python manage.py migrate`
+5. Migrate: Go to `/quip` & run `python manage.py makemigrations` & `python manage.py migrate`
 
-6. pray
+6. pray or something
 
 7. `python manage.py runserver`
 
