@@ -3,50 +3,70 @@
 
 {% block title %}{{ challenge.function_name }} - quip Challenge{% endblock title %}
 
-{% block links %}
-    <!-- Monaco -->
-    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
-{% endblock links %}
+{% block links %}{% endblock links %}
 
 {% block content %}
-    <a href="/" class="position-absolute top-0 end-0">back</a>
-    <div class="row p-3">
-        <div class="col border border-dark rounded m-3 p-4 bg-light">
-            <h1>QUIP -- initial demo</h1>
-            <p id="description">{{ challenge.description }}</p>
-		    <div id="monaco-editor" style="width: 460px; height: 400px; border: 1px solid grey"></div>
-            <p id="output"></p>
-            <button onclick="main()">Run Python Code</button>
-            <button onclick="loadRandomChallenge()">Random Challenge</button>
-        </div>
-        <div class="col border border-dark rounded m-3 p-4 bg-light" id="table-container">
-            Run code to see output
-        </div>
-    </div>
+<a href="/" class="position-absolute top-0 end-0">back</a>
+<div class="row p-3">
+  <div class="col border border-dark rounded m-3 p-4 bg-light">
+    <h1>QUIP -- initial demo</h1>
+    <p id="description">{{ challenge.description }}</p>
+    <div id="code-editor" style="width: 460px; height: 400px; border: 1px solid grey"></div>
+    <p id="output"></p>
+    <button id="run">Run Python Code</button>
+    <button id="random">Random Challenge</button>
+  </div>
+  <div class="col border border-dark rounded m-3 p-4 bg-light" id="table-container">
+    Run code to see output
+  </div>
+</div>
 {% endblock content %}
 
 {% block scripts %}
-    <!-- Pyodide -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 
-    <!-- Monaco -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
-    <script>
-        require.config({ paths: { vs: '/static/node_modules/monaco-editor/dev/vs' } });
+<!--
+  JSPM Generator Import Map
+  Edit URL: https://generator.jspm.io/#Y2VhYGDhD80rySzJSU1hcEjOT0nNzSwqyi/ST87PzU3MSyl2MNMz1jNCkcpJzEvXLagsycjPA8oa6hmjyJZlppYDhY2M9AwZEMJAEQM9QwDCZLZkcAA
+-->
+<script type="importmap">
+{
+  "imports": {
+    "@codemirror/commands": "https://ga.jspm.io/npm:@codemirror/commands@6.3.2/dist/index.js",
+    "@codemirror/lang-python": "https://ga.jspm.io/npm:@codemirror/lang-python@6.1.3/dist/index.js",
+    "@codemirror/view": "https://ga.jspm.io/npm:@codemirror/view@6.22.1/dist/index.js",
+    "codemirror": "https://ga.jspm.io/npm:codemirror@6.0.1/dist/index.js"
+  },
+  "scopes": {
+    "https://ga.jspm.io/": {
+      "@codemirror/autocomplete": "https://ga.jspm.io/npm:@codemirror/autocomplete@6.11.1/dist/index.js",
+      "@codemirror/language": "https://ga.jspm.io/npm:@codemirror/language@6.9.3/dist/index.js",
+      "@codemirror/lint": "https://ga.jspm.io/npm:@codemirror/lint@6.4.2/dist/index.js",
+      "@codemirror/search": "https://ga.jspm.io/npm:@codemirror/search@6.5.5/dist/index.js",
+      "@codemirror/state": "https://ga.jspm.io/npm:@codemirror/state@6.3.2/dist/index.js",
+      "@lezer/common": "https://ga.jspm.io/npm:@lezer/common@1.1.1/dist/index.js",
+      "@lezer/highlight": "https://ga.jspm.io/npm:@lezer/highlight@1.2.0/dist/index.js",
+      "@lezer/lr": "https://ga.jspm.io/npm:@lezer/lr@1.3.14/dist/index.js",
+      "@lezer/python": "https://ga.jspm.io/npm:@lezer/python@1.1.9/dist/index.js",
+      "crelt": "https://ga.jspm.io/npm:crelt@1.0.6/index.js",
+      "style-mod": "https://ga.jspm.io/npm:style-mod@4.1.0/src/style-mod.js",
+      "w3c-keyname": "https://ga.jspm.io/npm:w3c-keyname@2.2.8/index.js"
+    }
+  }
+}
+</script>
 
-        require(['vs/editor/editor.main'], function () {
-            window.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
-                value: "def {{ challenge.function_name }}({% for arg in challenge.function_args %}{{arg}}{% if not forloop.last%}, {% endif %}{% endfor %}):\n    return 1",
-                language: 'python'
-            });
-        });
-    </script>
+<!-- ES Module Shims: Import maps polyfill for older browsers without import maps support (eg Safari 16.3) -->
+<script async src="https://ga.jspm.io/npm:es-module-shims@1.8.2/dist/es-module-shims.js"
+  crossorigin="anonymous"></script>
 
-    <script>
-        // this is correct after jinja2 templating -- ignore squigglies
-        // todo: disable awful red marks
-        var challengeData = {{ challenge_data | safe }}
-        var maximumId = {{ max_id }}
-    </script>
-    <script src="{% static 'challenges/index.js' %}" charset="utf-8"></script>
+<!-- Pyodide
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" async></script>
+-->
+<script>
+  // this is correct after jinja2 templating -- ignore squigglies
+  // todo: disable awful red marks
+  window.challenge = {{challenge_data | safe}}
+  window.maximumId = {{max_id}}}
+</script>
+<script src="{% static 'challenges/index.js' %}" type="module" charset="utf-8"></script>
 {% endblock scripts %}
