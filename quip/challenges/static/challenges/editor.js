@@ -1,5 +1,6 @@
 import {basicSetup} from "codemirror"
 import {EditorView, keymap} from "@codemirror/view"
+import {EditorState} from "@codemirror/state"
 import {indentWithTab} from "@codemirror/commands"
 import { python } from "@codemirror/lang-python"
 
@@ -13,7 +14,7 @@ export default function initEditor() {
   })
 }
 
-export function setCode() {
+export function setCode(text) {
   window.editor_view.setState(EditorState.create({doc: text, extensions}))
 }
 export function getCode() {

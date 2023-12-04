@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 
 # Challenges should only be allowed to be submitted from trusted sources
@@ -20,4 +22,4 @@ class Challenge(models.Model):
         return f"challenge #{self.id:0>4} | {self.function_name}"
     
     def json(self):
-        return str({name:getattr(self, name) for name in self.fields})
+        return json.dumps({name:getattr(self, name) for name in self.fields})

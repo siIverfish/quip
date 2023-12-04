@@ -39,7 +39,7 @@ function setError(value){
 
 function resetCode(){
     setCode(`def ${window.challenge.function_name}(${window.challenge.function_args.join(", ")}):\n\treturn None`);
-    document.getElementById("description"    ).innerHTML = challengeData.description;
+    document.getElementById("description"    ).innerHTML = challenge.description;
     document.getElementById("table-container").innerHTML = "Run code to see output";
 }
 

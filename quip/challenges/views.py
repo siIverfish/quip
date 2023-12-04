@@ -21,3 +21,7 @@ def detail(request, challenge_id):
             max_id=Challenge.objects.latest('id').id, # this might be slow?
         )
     )
+
+def detail_json(_, challenge_id):
+    challenge = get_object_or_404(Challenge, pk=challenge_id)
+    return HttpResponse(challenge.json())
