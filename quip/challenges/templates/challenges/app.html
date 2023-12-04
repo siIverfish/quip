@@ -64,8 +64,8 @@
 <script>
   // this is correct after jinja2 templating -- ignore squigglies
   // todo: disable awful red marks
-  window.challenge = {{challenge_data | safe}}
-  window.maximumId = {{max_id}}}
+  window.challenge = {{ challenge_data | safe }}
+  window.maximumId = {{ max_id }}
 </script>
 <script src="{% static 'challenges/index.js' %}" type="module" charset="utf-8"></script>
 {% endblock scripts %}
