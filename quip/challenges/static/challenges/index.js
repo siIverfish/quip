@@ -48,16 +48,13 @@ function setPathWithoutReload(newPath){
 }
 
 function loadChallenge(name) {
-    const newPath = "/challenges/" + name
-    setPathWithoutReload(newPath)
-    const request = new Request(newPath + "/json")
-
-    fetch(request)
+    fetch(new Request("/challenges/random/json"))
         .then((data) => data.blob())
         .then((data) => data.text())
         .then((data) => {
             window.challenge = JSON.parse(data);
             resetCode();
+            setPathWithoutReload(`/challenges/${window.challenge['id']}`);
         });
 }
 

@@ -22,6 +22,6 @@ def detail(request, challenge_id):
         )
     )
 
-def detail_json(_, challenge_id):
-    challenge = get_object_or_404(Challenge, pk=challenge_id)
-    return HttpResponse(challenge.json())
+def random_json(_request):
+    # This may be dangerously slow. 
+    return HttpResponse(Challenge.objects.order_by('?').first().json())

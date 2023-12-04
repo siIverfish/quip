@@ -11,6 +11,7 @@ class Challenge(models.Model):
         "function_name",
         "function_args",
         "cases",
+        "id",
     ]
     
     description = models.CharField(max_length=1000)
