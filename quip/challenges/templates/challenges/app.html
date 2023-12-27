@@ -8,7 +8,7 @@
 {% block content %}
 <div class="row p-3">
   <div class="col border border-dark rounded m-3 p-4 bg-light">
-    <h1>QUIP -- initial demo</h1>
+    <h1>Challenge {{ challenge.id }}: {{ challenge.function_name }}</h1>
     <p id="description">{{ challenge.description }}</p>
     <div id="code-editor" style="width: 100%; height: 60vh; border: 1px solid grey;overflow: auto;"></div>
     <button id="run">Run Python Code</button>
