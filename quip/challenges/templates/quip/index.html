@@ -1,11 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quip</title>
-</head>
-<body>
-    <h1>quip (templates/quip/index.html)</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}quip{% endblock title %}
+
+
+{% block links %}
+<style>
+    .code-background {
+        background-image: url("{% static 'img/code-background.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        z-index: -1;
+    }
+</style>
+{% endblock links %}
+
+{% block content %}
+
+<section class="container-fluid code-background">
+    <div class="container ms-5 mt-5 pe-0 me-0">
+        <h1 class="fw-bold text-dark">Modern technology for modern learning</h1>
+    </div>
+    <div class="container ms-5 mt-5 bg-dark border rounded w-50 border-dark">
+        <p class="text-light mt-2">
+            quip is an educational coding website centered on objectives called Challenges. 
+            Bite-sized, repeatable practice builds knowledge and accompanies lessons well.
+            Rather than running user-submitted code serverside, necessitating obstructive security practices and reliable internet, quip uses Pyodide
+            to run Python in-browser. This means that the full language, standard library, and even external packages are available.
+        </p>
+    </div>
+</section>
+{% endblock content %}
