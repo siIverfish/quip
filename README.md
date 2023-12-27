@@ -6,26 +6,17 @@ This is a website aimed at teaching code through short examples. However, `quip`
 
 ## Local install
 
-1. Create virtual environment with 'venv'
-`python -m venv env`
+(linux)
+should maybe work.
+- prerequisite: have a running postgres server @ localhost port 5432 w/ database quip, superuser quipuser.
 
-2. Activate environment (will be slightly different on windows)
-linux: `source .\env\bin\activate`
-windows: `.\env\Scripts\activate`?
-
-3. Install packages
-`pip install django psycopg2 python-dotenv`
-
-4. (hard part) Get a postgres server running @ localhost with data specified in `quip/quip/settings.py@DATABASES`.
-I recommend [this digitalocean article](https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-20-04).
-Copy database user password in a .env file at root of repository with PG_PASSWORD key set correctly.
-
-5. Migrate: Go to `/quip` & run `python manage.py makemigrations` & `python manage.py migrate`
-
-6. pray or something
-
-7. `python manage.py runserver`
-
-8. & voila it works perfectly for sure
-
-9. Also, import all the challenges from quip/challenges/data into postgres database manually or via light scripting
+```
+git clone https://github.com/siiverfish/quip
+cd quip
+echo "PG_PASSWORD='<REPLACE WITH POSTGRES PASSWORD>'" > ./quip/.env
+python -m venv env
+source ./env/bin/activate
+pip install -r requirements.txt
+python ./quip/manage.py migrate
+python ./quip/manage.py runserver
+```
