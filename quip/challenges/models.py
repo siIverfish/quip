@@ -24,3 +24,8 @@ class Challenge(models.Model):
     
     def json(self):
         return json.dumps({name:getattr(self, name) for name in self.fields})
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        
+        return reverse("detail", kwargs={"challenge_id": self.id}, current_app="challenges")

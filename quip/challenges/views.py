@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 
 from .models import Challenge
@@ -25,3 +25,6 @@ def detail(request, challenge_id):
 def random_json(_request):
     # This may be dangerously slow. 
     return HttpResponse(Challenge.objects.order_by('?').first().json())
+
+def random_redirect(_request):
+    return redirect(Challenge.objects.order_by('?').first().get_absolute_url())
