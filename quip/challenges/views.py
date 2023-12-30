@@ -7,7 +7,25 @@ from .models import Challenge
 
 # Create your views here.
 def index(request):
-    return render(request, "challenges/index.html", dict(challenges=Challenge.objects.all()))
+    # there is probably an efficient way to simultaneously extract this data.
+    data = (
+        dict(
+            color='success', 
+            difficulty='Easy',   
+            challenges=Challenge.objects.filter(difficulty="Easy"  )
+        ),
+        dict(
+            color='warning', 
+            difficulty='Medium', 
+            challenges=Challenge.objects.filter(difficulty="Medium")
+        ),
+        dict(
+            color='danger',  
+            difficulty='Hard',   
+            challenges=Challenge.objects.filter(difficulty="Hard"  )
+        ),
+    )
+    return render(request, "challenges/index.html", dict(data=data))
 
 def detail(request, challenge_id):
     challenge = get_object_or_404(Challenge, pk=challenge_id)

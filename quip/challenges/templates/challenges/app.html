@@ -7,14 +7,14 @@
 
 {% block content %}
 <div class="row p-3">
-  <div class="col border border-dark rounded m-3 p-4 bg-light">
+  <div class="col border border-dark rounded m-3 p-4 bg-dark text-light">
     <h1>Challenge {{ challenge.id }}: {{ challenge.function_name }}</h1>
     <p id="description">{{ challenge.description }}</p>
     <div id="code-editor" style="width: 100%; height: 60vh; border: 1px solid grey;overflow: auto;"></div>
     <button id="run">Run Python Code</button>
     <button id="random">Random Challenge</button>
   </div>
-  <div class="col border border-dark rounded m-3 p-4 bg-light" id="table-container">
+  <div class="col border border-dark rounded m-3 p-4 bg-dark text-light" id="table-container">
     Run code to see output
   </div>
 </div>

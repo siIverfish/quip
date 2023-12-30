@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
 
 
-{% block title %}quip - Home{% endblock title %}
+{% block title %}quip - All Challenges{% endblock title %}
 
 
 {% block content %}
-    <h1 class="m-2">Welcome to quip!</h1>
-
-    {% for challenge in challenges %}
-        <div class="card d-inline-flex p-4 m-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ challenge.function_name }}</h5>
-                <p class="card-text" style="width: 15em;">{{ challenge.description }}</p>
-                <a href="/challenges/{{ challenge.id }}" class="btn btn-primary">Go to challenge</a>
+    <section class="container text-center p-4 m-5">
+        <h1>All Challenges</h1>
+        <!-- "<hr />"" is gross. fight me. -iz -->
+        <hr>
+    </section>
+    <section class="row">
+        {% for group in data %}
+            {# todo: some js animation would be nice here. maybe they could rotate or  #}
+            <div class="col-sm text-center">
+                <h1 class="text-{{ group.color }}">{{ group.difficulty }}</h1>
+                {% for challenge in group.challenges %}
+                    <div class="card d-inline-flex p-4 m-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ challenge.function_name }}</h5>
+                            <p class="card-text" style="width: 15em;">{{ challenge.description }}</p>
+                            <a href="/challenges/{{ challenge.id }}" class="btn btn-primary">Go to challenge</a>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </section>
 
 {% endblock content %}

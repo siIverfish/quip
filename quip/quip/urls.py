@@ -24,5 +24,5 @@ from . import views as quip_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('challenges/', include("challenges.urls")),
-    path('', quip_views.index)
+    path('', quip_views.index),
 ]

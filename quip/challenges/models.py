@@ -6,6 +6,13 @@ from django.db import models
 # they can be used for XSS attacks w/ current setup
 
 class Challenge(models.Model):
+    
+    # todo: validate correctness of this field @ database level
+    class Difficulty(models.TextChoices):
+        EASY = "Easy"
+        MEDIUM = "Medium"
+        HARD = "Hard"
+    
     fields = [
         "description",
         "function_name",
@@ -18,6 +25,11 @@ class Challenge(models.Model):
     function_name = models.CharField(max_length=40)
     function_args = models.JSONField()
     cases = models.JSONField()
+    difficulty = models.TextField(
+        choices=Difficulty.choices,
+        default=Difficulty.EASY,
+        verbose_name="Difficulty"
+    )
     
     def __str__(self):
         return f"challenge #{self.id:0>4} | {self.function_name}"
