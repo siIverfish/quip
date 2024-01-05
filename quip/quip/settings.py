@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'quip.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'quip',
-        'USER': 'quipuser',
-        'PASSWORD': os.getenv("PG_PASSWORD"),
-        'HOST': 'localhost',
-        'POST': '',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': (Path(__file__).parent.parent.parent / 'db' / '.password').read_text(),
+        'HOST': 'postgres:5432',
+        'PORT': 5432,
     }
 }
 
