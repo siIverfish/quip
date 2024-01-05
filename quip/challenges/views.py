@@ -45,4 +45,7 @@ def random_json(_request):
     return HttpResponse(Challenge.objects.order_by('?').first().json())
 
 def random_redirect(_request):
-    return redirect(Challenge.objects.order_by('?').first().get_absolute_url())
+    try:
+        return redirect(Challenge.objects.order_by('?').first().get_absolute_url())
+    except AttributeError:
+        abort(404)
