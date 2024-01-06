@@ -49,5 +49,6 @@ RUN pip install -r requirements.txt
 
 
 # Run the application.
-CMD python quip/manage.py migrate; \
+CMD python quip/manage.py migrate;\
+    python quip/manage.py loaddata challenges;\
     python quip/manage.py runserver 0.0.0.0:8000

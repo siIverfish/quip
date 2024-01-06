@@ -10,11 +10,10 @@ from .challenge import Challenge
 IGNORED_FILES = ["__pycache__", "__init__.py", "challenge.py"]
 
 for file_name in os.listdir(os.path.dirname(__file__)):
-    print(file_name)
     if file_name in IGNORED_FILES:
         continue
     else:
-        importlib.import_module("." + file_name.removesuffix(".py"), "challenges")
+        importlib.import_module("." + file_name.removesuffix(".py"), "data")
 
 
 
