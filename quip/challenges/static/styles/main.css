@@ -1,0 +1,65 @@
+#overlay {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    background-color: rgba(0,0,0,0.6)
+}
+.topnav {
+    background-color: #000;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+
+.navitem {
+    color: white;
+    text-decoration: none;
+    padding: 14px 16px;
+    text-align: center;
+    transition-duration: 0.3s;
+    font-family: "JetBrains Mono";
+}
+
+.topnav-left {
+    margin-right: auto;
+}
+
+.navitem:hover {
+    background-color: #707070;
+}
+.active {
+    background-color: #0099ff;
+}
+.title {
+    margin-top: 75px;
+    margin-left: 50px;
+    margin-right: 20px;
+    color: white;
+    font-family: "JetBrains Mono";
+    z-index: 2;
+    /* text-shadow: 2px 2px black, -2px 2px black, 2px -2px black, -2px -2px black; */ /*<-- This da border*/
+}
+.explanation {
+    background-color: #242424;
+    border-radius: 20px;
+    padding: 10px 16px;
+    width: 650px;
+    height: 200px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.explanation-text {
+    color: white;
+    font-family: "JetBrains Mono";
+}

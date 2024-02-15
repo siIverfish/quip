@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}quip{% endblock title %}</title>
     <link rel="icon" href="/static/img/favicon.png"/>
-
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <script src="/static/styles/active.js"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Fonts from Google Fonts becuz i lik google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Dosis:wght@200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nova+Square&family=Orbitron:wght@400..900&family=Protest+Strike&family=Roboto&display=swap" rel="stylesheet">
 
     <!-- links block -->
     {% block links %}
     {% endblock links %}
 </head>
-<body>
+<body onload="writeTitle()">
     <!-- include navbar -->
     {% include 'challenges/navbar.html' %}
     <!-- padding for navbar -->

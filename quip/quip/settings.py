@@ -31,8 +31,7 @@ SECRET_KEY = 'django-insecure--dx_i$tg%x@p3r-2j4drw!jv+!*rhvmjx3by+kgvll6_oe513i
 DEBUG = True
 
 # ADD REAL DOMAIN NAME IN PRODUCTION
-ALLOWED_HOSTS = ["127.0.0.1"]
-
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
